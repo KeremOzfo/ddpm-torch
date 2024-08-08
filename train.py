@@ -23,7 +23,9 @@ def train(rank=0, args=None, temp_dir=""):
     root = os.path.expanduser(args.root)
     if args.config_path is None:
         args.config_path = os.path.join(args.config_dir, args.dataset + ".json")
+        print('new config path:', args.config_path)
     with open(args.config_path, "r") as f:
+        print('config path:', args.config_path)
         meta_config = json.load(f)
     exp_name = os.path.basename(args.config_path)[:-5]
 
@@ -239,6 +241,7 @@ def main():
     parser = ArgumentParser()
     parser.add_argument("--config-path", type=str, help="path to the configuration file")
     parser.add_argument("--exp-name", type=str, help="name of the current experiment run")
+    print(DATASET_DICT.keys())
     parser.add_argument("--dataset", choices=DATASET_DICT.keys(), default="cifar10")
     parser.add_argument("--root", default="~/datasets", type=str, help="root directory of datasets")
     parser.add_argument("--epochs", default=50, type=int, help="total number of training epochs")
